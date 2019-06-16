@@ -1,0 +1,43 @@
+﻿@model Review
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Movie" asp-action="Index">Movies</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Delete Review</li>
+    </ol>
+</nav>
+
+<br />
+<h3>Delete</h3>
+<br />
+<h5>Are you sure you want to delete this Review?</h5>
+<br />
+
+<!-- this is a table showing details of review to be deleted -->
+<div class="details">
+
+    <dl class="row">
+        <dt class="col-3">Name</dt>
+        <dd class="col-9">@Model.Name</dd>
+        <dt class="col-3">On</dt>
+        <dd class="col-9">@Model.On</dd>
+        <dt class="col-3">Comment</dt>
+        <dd class="col-9">@Model.Comment</dd>
+        <dt class="col-3">Rating</dt>
+        <dd class="col-9">@Model.Rating</dd>
+    </dl>
+
+</div>
+
+<!-- this is a form sending hidden Id attribute to DeleteReviewConfirmed method in controller-->
+<form asp-action="DeleteReviewConfirmed">
+
+    <input type="hidden" asp-for="Id" class="form-control" />
+
+    <!-- these are the delete & cancel buttons-->
+    <div class="form-group">
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Details" asp-route-id="@Model.MovieId">Back to Movie</a>
+    </div>
+</form>

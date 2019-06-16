@@ -1,0 +1,49 @@
+﻿@model Movie
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Movie" asp-action="Index">Movies</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Delete</li>
+    </ol>
+</nav>
+
+<br />
+<h3>Delete</h3>
+<br />
+<h5>Are you sure you want to delete this Movie?</h5>
+<br />
+
+<!-- this is a table showing details of movie to be deleted-->
+<div class="details">
+
+    <dl class="row">
+        <dt class="col-3">Title</dt>
+        <dd class="col-9">@Model.Title</dd>
+        <dt class="col-3">Director</dt>
+        <dd class="col-9">@Model.Director</dd>
+        <dt class="col-3">Year</dt>
+        <dd class="col-9">@Model.Year</dd>
+        <dt class="col-3">Cast</dt>
+        <dd class="col-9">@Model.Cast</dd>
+        <dt class="col-3">Duration</dt>
+        <dd class="col-9">@Model.Duration</dd>
+        <dt class="col-3">Rating</dt>
+        <dd class="col-9">@(Model.Rating)%</dd>
+        <dt class="col-3">Plot</dt>
+        <dd class="col-9">@Model.Plot</dd>
+    </dl>
+</div>
+<br />
+
+<!-- this is a form sending hidden Id attribute to DeleteConfirmed method in controller-->
+<form asp-action="DeleteConfirmed">
+
+    <input type="hidden" asp-for="Id" class="form-control" />
+
+    <!-- these are the delete & cancel buttons-->
+    <div class="form-group">
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-controller="Movie" asp-action="Index">Back to list</a>
+    </div>
+</form>

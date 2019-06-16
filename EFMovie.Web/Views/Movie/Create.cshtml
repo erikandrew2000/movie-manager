@@ -1,0 +1,93 @@
+﻿@model Movie
+@using EFMovie.Data.Models
+
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Movie" asp-action="Index">Movies</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Create</li>
+    </ol>
+</nav>
+
+<h3>Movie</h3>
+<br />
+<h5>Create</h5>
+<br />
+
+<!-- this is the form with input fields to enter movie attributes-->
+<form asp-action="Create">
+    
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+    <div class="form-group">
+        <label asp-for="Title" class="control-label"></label>
+        <input asp-for="Title" class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Director" class="control-label"></label>
+        <input asp-for="Director" class="form-control" />
+        <span asp-validation-for="Director" class="text-danger"></span>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <label asp-for="Year" class="control-label"></label>
+            <input asp-for="Year" class="form-control" />
+            <span asp-validation-for="Year" class="text-danger"></span>
+        </div>
+        <div class="col">
+            <label asp-for="Budget" class="control-label"></label>
+            <input asp-for="Budget" class="form-control" />
+            <span asp-validation-for="Budget" class="text-danger"></span>
+        </div>
+        <div class="col">
+            <label asp-for="Duration" class="control-label"></label>
+            <input asp-for="Duration" class="form-control" />
+            <span asp-validation-for="Duration" class="text-danger"></span>
+        </div>
+        <div class="col">
+            <label asp-for="Genre" class="control-label"></label>
+            <select asp-for="Genre" asp-items="Html.GetEnumSelectList<Genre>()" class="form-control">
+                <option>Select Genre</option>
+            </select>
+            <span asp-validation-for="Genre" class="text-danger"></span>
+        </div>
+
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Cast" class="control-label"></label>
+        <input asp-for="Cast" class="form-control" />
+        <span asp-validation-for="Cast" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="PosterUrl" class="control-label"></label>
+        <input asp-for="PosterUrl" class="form-control" />
+        <span asp-validation-for="PosterUrl" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Plot" class="control-label"></label>
+        <textarea rows="5" asp-for="Plot" class="form-control"></textarea>
+        <span asp-validation-for="Plot" class="text-danger"></span>
+    </div>
+
+
+    <!-- these are the buttons to submit or cancel-->
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-primary" />
+        <a class="btn btn-secondary" asp-action="Index">Cancel</a>
+    </div>
+
+</form>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

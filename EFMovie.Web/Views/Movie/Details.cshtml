@@ -1,0 +1,89 @@
+﻿@model Movie
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Movie" asp-action="Index">Movies</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Details</li>
+    </ol>
+</nav>
+
+<br />
+<h3>Movie</h3>
+<br />
+<h5>Details</h5>
+<br />
+
+<!-- this is a table showing movie details-->
+<div class="row">
+    <div class="col-7">
+
+        <dl class="row">
+            <dt class="col-3">Title</dt>
+            <dd class="col-9">@Model.Title</dd>
+            <dt class="col-3">Director</dt>
+            <dd class="col-9">@Model.Director</dd>
+            <dt class="col-3">Year</dt>
+            <dd class="col-9">@Model.Year</dd>
+            <dt class="col-3">Budget ($m)</dt>
+            <dd class="col-9">@Model.Budget</dd>
+            <dt class="col-3">Genre</dt>
+            <dd class="col-9">@Model.Genre</dd>
+            <dt class="col-3">Cast</dt>
+            <dd class="col-9">@Model.Cast</dd>
+            <dt class="col-3">Duration</dt>
+            <dd class="col-9">@Model.Duration</dd>
+            <dt class="col-3">Rating</dt>
+            <dd class="col-9">
+                <div class="flex-container">
+                    <div class="star-ratings-css">
+                        <div class="star-ratings-css-top" style="width: @(Model.Rating)%">
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                        </div>
+                        <div class="star-ratings-css-bottom">
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                        </div>
+                    </div>
+                    <div>&nbsp; /</div>
+                    <div class="number-box"><b>@Model.ReviewsCount</b> </div>
+                </div>
+            </dd>
+            <dt class="col-3">Plot</dt>
+            <dd class="col-9">@Model.Plot</dd>
+        </dl>
+
+    </div>
+
+    <!-- this div includes the photo and the edit & back to list buttons below it-->
+    <div class="col-5">
+        <div class="row" style="display: flex; justify-content: center;">
+            <img src=@Model.PosterUrl class="img-fluid" alt="Error: image not displaying" style="width:250px;">
+        </div>
+        <br />
+        <div class="row" style="display: flex; justify-content: center; align-items: center">
+            <a class="btn btn-primary" style="margin:10px;" asp-action="Edit" asp-route-id=@Model.Id>Edit Movie</a>
+            <a asp-controller="Movie" asp-action="Index">  Back to list</a>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+
+<!-- Add Partial view rendering the reviews -->
+<partial name="_Reviews" />
+
+<!-- this div displays an 'empty' message if there are no reviews, and includes an 'add review' button-->
+<div class="col">
+    <br />
+    <div class="row">
+        @if (Model.Reviews.Count == 0)
+        {
+            <p><b>The reviews list is empty.</b></p>
+        }
+    </div>
+
+    <br />
+    <div class="row">
+        <a class="btn btn-warning" asp-action="AddReview" asp-route-id=@Model.Id>Add Review</a>
+    </div>
+</div>

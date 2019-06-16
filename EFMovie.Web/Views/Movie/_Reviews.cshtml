@@ -1,0 +1,33 @@
+﻿<!-- this is the partial view of reviews list to be inserted in movie details page-->
+
+<h3>Reviews</h3>
+
+
+<!-- this is the actual table of reviews-->
+<table class="table table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th>Created</th>
+            <th>Name</th>
+            <th>Comment</th>
+            <th>Rating 1-10</th>
+            <th>        </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var t in Model.Reviews)
+        {
+            <tr>
+                <td>@t.On.ToShortDateString()</td>
+                <td>@t.Name</td>
+                <td>@t.Comment</td>
+                <td>@t.Rating</td>
+                <td><a asp-controller="Movie" asp-action="DeleteReview" asp-route-id=@t.Id><i class="material-icons">delete</i></a></td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+
+

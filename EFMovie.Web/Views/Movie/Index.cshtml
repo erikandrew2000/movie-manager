@@ -1,0 +1,65 @@
+﻿@model IList<Movie>
+<!-- the nav paragraph below is the breadcrumb grey banner-->
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Movies</li>
+    </ol>
+</nav>
+<!-- breadcrumb ends here-->
+
+<h3>Movies</h3>
+
+<!-- button to create new movie-->
+<div class="mt-4 mb-4">
+    <a class="btn btn-primary" asp-action="Create">Create New</a>
+</div>
+
+<!-- table with the list of movies, some attributes and edit/details/delete button 
+    for each movie-->
+<table class="table">
+
+    <thead class="thead-light">
+
+        <tr>
+            <th class="text-primary">#</th>
+            <th class="text-primary">Title</th>
+            <th class="text-primary">Director</th>
+            <th class="text-primary">Year</th>
+            <th class="text-primary">Genre</th>
+            <th>     </th>
+        </tr>
+
+    </thead>
+    <tbody>
+        @foreach (var s in Model)
+        {
+            <tr>
+                <td>@s.Id</td>
+                <td>@s.Title</td>
+                <td>@s.Director</td>
+                <td>@s.Year</td>
+                <td>@s.Genre</td>
+                <td>
+                    <a asp-controller="Movie" asp-action="Edit" asp-route-id=@s.Id>
+                        <i class="material-icons">edit</i>
+                    </a>  
+                    <a asp-controller="Movie" asp-action="Details" asp-route-id=@s.Id>
+                        <i class="material-icons">visibility</i>
+                    </a>  
+                    <a asp-controller="Movie" asp-action="Delete" asp-route-id=@s.Id>
+                        <i class="material-icons">delete</i>
+                    </a>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+<br />
+
+<!-- this paragraph will display an 'empty' message if there are no movies in list-->
+@if (Model.Count == 0)
+{
+    <p><b>The movie list is empty.</b></p>
+}
